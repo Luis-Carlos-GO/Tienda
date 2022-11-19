@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http//www.w3.org/1999/xhtml">
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <header th:replace="plantilla/template::header"></header>
+            <div class="contenido">
+                <h2>Listado Clientes</h2>
+                <a th:href="@{/categoria/nueva}">nueva categoria</a>
+                <div th:if="${categorias !=null and !categorias.empty}">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Activa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="categoria : ${categorias}">
+                                <td th:text="${categoria.descripcion}"></td>
+                                <td><input type="checkbox" name="activa" th:checked="${categoria.activo}" disabled="true"></td>
+                                <td><a th:href="@{/categoria/eliminar/} + ${categoria.idCategoria}">Eliminar</a></td>
+                                <td><a th:href="@{/categoria/modificar/} + ${categoria.idCategoria}">Modificar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:if="${categoria == null or categorias.empty}">
+                    No tenemos categorias que mostrar....
+                </div>
+            </div>
+        <footer th:replace="plantilla/template::footer"></footer>
+      
+    </body>
+</html>
